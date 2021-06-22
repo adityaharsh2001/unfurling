@@ -9,22 +9,12 @@
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
 }
-/* .btncontainer
-{
-  margin-top: 20px;
-  text-align: center;
-
-} */
 .hungupbutton
 {
-  cursor: pointer;
-  margin-top: 20px;
-  color:red;
-  background-color: transparent;
+  display: grid;
   margin-left: auto;
   margin-right: auto;
-  font-size: 50px;
-  text-align: center;
+  width: 40%;
 }
 .options__dark{
   

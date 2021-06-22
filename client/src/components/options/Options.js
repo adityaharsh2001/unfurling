@@ -5,16 +5,16 @@ import Teams from "../../assests/teams.mp3";
 import * as classes from "./Options.module.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import VideoContext from "../../context/VideoContext";
+import { faHome, faPhone, faPhoneSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Hang from "../../assests/hang.svg";
 import {
-
   TelegramShareButton,
   LinkedinShareButton,
   TelegramIcon,
   LinkedinIcon,
   WhatsappShareButton,
   WhatsappIcon,
-  
 } from "react-share";
 import {
   UserOutlined,
@@ -22,9 +22,8 @@ import {
   InfoCircleOutlined,
   PhoneOutlined,
 } from "@ant-design/icons";
-import { socket } from "../../context/VideoState";
 
-const Options = ({themeValue}) => {
+const Options = ({ themeValue }) => {
   const [idToCall, setIdToCall] = useState("");
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -32,9 +31,9 @@ const Options = ({themeValue}) => {
   const {
     call,
     callAccepted,
-    myVideo,
-    userVideo,
-    stream,
+    // myVideo,
+    // userVideo,
+    // stream,
     name,
     setName,
     callEnded,
@@ -42,7 +41,7 @@ const Options = ({themeValue}) => {
     callUser,
     leaveCall,
     answerCall,
-    otherUser,
+    // otherUser,
     setOtherUser,
     leaveCall1,
   } = useContext(VideoContext);
@@ -71,173 +70,174 @@ const Options = ({themeValue}) => {
 
   return (
     <div>
-      {callAccepted ? <div className={classes.hungupbutton}><Button
-            variant="contained"
-            onClick={leaveCall}
-            className={classes.hang}
-            tabIndex="0"
-          >
-            <img src={Hang} alt="hang up" style={{ height: "15px" }} />
-            &nbsp; Hang up
-          </Button></div> :
-    <div className={`${classes.options} ${themeValue && classes.options__dark}`} >
-      <div style={{ marginBottom: "0.5rem" }}>
-        <h2 style={{color:"#1890ff"}}>Username</h2>
-        <Input
-          size="large"
-          placeholder="Your name"
-          prefix={<UserOutlined />}
-          maxLength={15}
-          suffix={<small>{name.length}/15</small>}
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-            localStorage.setItem("name", e.target.value);
-          }}
-          className={classes.inputgroup}
-        />
-
-        <div className={classes.share_options}>
-          <CopyToClipboard text={me}>
-            <Button
-              type="primary"
-              icon={<CopyOutlined />}
-              className={classes.btn}
-              tabIndex="0"
-              onClick={() => message.success("Code copied successfully!")}
-            >
-              Meeting code
-            </Button>
-          </CopyToClipboard>
-
-          <div className={classes.share_social}>
-            <WhatsappShareButton
-              url={`https://video-chatter.netlify.com/`}
-              title={`Join this meeting with the given code ${me}\n`}
-              separator="Link: "
-              className={classes.share_icon}
-            >
-              <WhatsappIcon size={26} round />
-            </WhatsappShareButton>
-            <TelegramShareButton
-              url={`https://video-chatter.netlify.com/`}
-              title={`Join this meeting with the given code ${me}\n`}
-              separator="Link: "
-              className={classes.share_icon}
-            >
-              <TelegramIcon size={26} round />
-            </TelegramShareButton>
-           
-            <LinkedinShareButton
-              url={`https://video-chatter.netlify.com/`}
-              title={`Join this meeting with the given code ${me}\n`}
-              className={classes.share_icon}
-            >
-              <LinkedinIcon size={26} round/>
-              </LinkedinShareButton>
-              
-          </div>
+      {callAccepted ? (
+        <div className={classes.hungupbutton} onClick={leaveCall}>
+          <FontAwesomeIcon icon={faPhone}/>
         </div>
-      </div>
-      <div style={{ marginBottom: "0.5rem" }}>
-        <h2 style={{color:"#1890ff"}}>New Meeting</h2>
+      ) : (
+        <div
+          className={`${classes.options} ${
+            themeValue && classes.options__dark
+          }`}
+        >
+          <div style={{ marginBottom: "0.5rem" }}>
+            <h2 style={{ color: "#1890ff" }}>Username</h2>
+            <Input
+              size="large"
+              placeholder="Your name"
+              prefix={<UserOutlined />}
+              maxLength={15}
+              suffix={<small>{name.length}/15</small>}
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+                localStorage.setItem("name", e.target.value);
+              }}
+              className={classes.inputgroup}
+            />
 
-        <Input
-          placeholder="Enter a code "
-          size="large"
-          className={classes.inputgroup}
-          value={idToCall}
-          onChange={(e) => setIdToCall(e.target.value)}
-          style={{ marginRight: "0.5rem", marginBottom: "0.5rem" }}
-          prefix={<UserOutlined className="site-form-item-icon" />}
-          suffix={
-            <Tooltip title="Enter code of the other user">
-              <InfoCircleOutlined style={{ color: "rgba(0,0,0,.45)" }} />
-            </Tooltip>
-          }
-        />
+            <div className={classes.share_options}>
+              <CopyToClipboard text={me}>
+                <Button
+                  type="primary"
+                  icon={<CopyOutlined />}
+                  className={classes.btn}
+                  tabIndex="0"
+                  onClick={() => message.success("Code copied successfully!")}
+                >
+                  Meeting code
+                </Button>
+              </CopyToClipboard>
 
-        {callAccepted && !callEnded ? (
-          <Button
-            variant="contained"
-            onClick={leaveCall}
-            className={classes.hang}
-            tabIndex="0"
-          >
-            <img src={Hang} alt="hang up" style={{ height: "15px" }} />
-            &nbsp; Hang up
-          </Button>
-        ) : (
-          <div className={classes.btnParent}> 
-          <Button
-            type="primary"
-            icon={<PhoneOutlined />}
-            onClick={() => {
-              if (name.length) callUser(idToCall);
-              else message.error("Please enter your name to call!");
-            }}
-            className={classes.btn}
-            tabIndex="0"
-          >
-            Join
-          </Button>
+              <div className={classes.share_social}>
+                <WhatsappShareButton
+                  url={`https://video-chatter.netlify.com/`}
+                  title={`Join this meeting with the given code ${me}\n`}
+                  separator="Link: "
+                  className={classes.share_icon}
+                >
+                  <WhatsappIcon size={26} round />
+                </WhatsappShareButton>
+                <TelegramShareButton
+                  url={`https://video-chatter.netlify.com/`}
+                  title={`Join this meeting with the given code ${me}\n`}
+                  separator="Link: "
+                  className={classes.share_icon}
+                >
+                  <TelegramIcon size={26} round />
+                </TelegramShareButton>
+
+                <LinkedinShareButton
+                  url={`https://video-chatter.netlify.com/`}
+                  title={`Join this meeting with the given code ${me}\n`}
+                  className={classes.share_icon}
+                >
+                  <LinkedinIcon size={26} round />
+                </LinkedinShareButton>
+              </div>
+            </div>
           </div>
-        )}
-      </div>
+          <div style={{ marginBottom: "0.5rem" }}>
+            <h2 style={{ color: "#1890ff" }}>New Meeting</h2>
 
-      {call.isReceivingCall && !callAccepted && (
-        <>
-          <audio src={Teams} loop ref={Audio} />
-          <Modal
-            title="Incoming Call"
-            visible={isModalVisible}
-            onOk={() => showModal(false)}
-            onCancel={handleCancel}
-            footer={null}
-          >
-            <div style={{ display: "flex", justifyContent: "space-around" }}>
-              <h1>
-                {call.name} is calling you:{" "}
-                <img
-                  src={Phone}
-                  alt="phone ringing"
-                  className={classes.phone}
-                  style={{ display: "inline-block" }}
-                />
-              </h1>
-            </div>
-            <div className={classes.btnDiv}>
+            <Input
+              placeholder="Enter a code "
+              size="large"
+              className={classes.inputgroup}
+              value={idToCall}
+              onChange={(e) => setIdToCall(e.target.value)}
+              style={{ marginRight: "0.5rem", marginBottom: "0.5rem" }}
+              prefix={<UserOutlined className="site-form-item-icon" />}
+              suffix={
+                <Tooltip title="Enter code of the other user">
+                  <InfoCircleOutlined style={{ color: "rgba(0,0,0,.45)" }} />
+                </Tooltip>
+              }
+            />
+
+            {callAccepted && !callEnded ? (
               <Button
                 variant="contained"
-                className={classes.answer}
-                color="#29bb89"
-                icon={<PhoneOutlined />}
-                onClick={() => {
-                  answerCall();
-                  Audio.current.pause();
-                }}
+                onClick={leaveCall}
+                className={classes.hang}
                 tabIndex="0"
               >
-                Answer
+                <img src={Hang} alt="hang up" style={{ height: "15px" }} />
+                &nbsp; Hang up
               </Button>
-              <Button
-                variant="contained"
-                className={classes.decline}
-                icon={<PhoneOutlined />}
-                onClick={() => {
-                  setIsModalVisible(false);
-                  Audio.current.pause();
-                }}
-                tabIndex="0"
+            ) : (
+              <div className={classes.btnParent}>
+                <Button
+                  type="primary"
+                  icon={<PhoneOutlined />}
+                  onClick={() => {
+                    if (name.length) callUser(idToCall);
+                    else message.error("Please enter your name to call!");
+                  }}
+                  className={classes.btn}
+                  tabIndex="0"
+                >
+                  Join
+                </Button>
+              </div>
+            )}
+          </div>
+
+          {call.isReceivingCall && !callAccepted && (
+            <>
+              <audio src={Teams} loop ref={Audio} />
+              <Modal
+                title="Incoming Call"
+                visible={isModalVisible}
+                onOk={() => showModal(false)}
+                onCancel={handleCancel}
+                footer={null}
               >
-                Decline
-              </Button>
-            </div>
-          </Modal>
-        </>
+                <div
+                  style={{ display: "flex", justifyContent: "space-around" }}
+                >
+                  <h1>
+                    {call.name} is calling you:{" "}
+                    <img
+                      src={Phone}
+                      alt="phone ringing"
+                      className={classes.phone}
+                      style={{ display: "inline-block" }}
+                    />
+                  </h1>
+                </div>
+                <div className={classes.btnDiv}>
+                  <Button
+                    variant="contained"
+                    className={classes.answer}
+                    color="#29bb89"
+                    icon={<PhoneOutlined />}
+                    onClick={() => {
+                      answerCall();
+                      Audio.current.pause();
+                    }}
+                    tabIndex="0"
+                  >
+                    Answer
+                  </Button>
+                  <Button
+                    variant="contained"
+                    className={classes.decline}
+                    icon={<PhoneOutlined />}
+                    onClick={() => {
+                      setIsModalVisible(false);
+                      Audio.current.pause();
+                    }}
+                    tabIndex="0"
+                  >
+                    Decline
+                  </Button>
+                </div>
+              </Modal>
+            </>
+          )}
+        </div>
       )}
-    </div> 
-    }
     </div>
   );
 };
