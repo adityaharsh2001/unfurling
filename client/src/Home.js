@@ -4,7 +4,7 @@ import Video from "./components/Video/Video";
 import VideoState from "./context/VideoState";
 import AppHeader from "./components/AppHeader/AppHeader";
 import Options from "./components/options/Options";
-import Footer from "./components/Footer/Footer";
+// import Footer from "./components/Footer/Footer";
 
 const Home = () => {
   const [theme, setTheme] = useState(false);

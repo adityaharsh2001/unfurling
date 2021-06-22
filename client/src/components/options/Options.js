@@ -5,8 +5,6 @@ import Teams from "../../assests/teams.mp3";
 import * as classes from "./Options.module.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import VideoContext from "../../context/VideoContext";
-import { faHome, faPhone, faPhoneSlash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Hang from "../../assests/hang.svg";
 import {
   TelegramShareButton,
@@ -72,7 +70,14 @@ const Options = ({ themeValue }) => {
     <div>
       {callAccepted ? (
         <div className={classes.hungupbutton} onClick={leaveCall}>
-          <FontAwesomeIcon icon={faPhone}/>
+          <Button
+                variant="contained"
+                onClick={leaveCall}
+                className={classes.hang}
+              >
+                <img src={Hang} alt="hang up" style={{ height: "15px" }} />
+                &nbsp; Hang up
+              </Button>
         </div>
       ) : (
         <div
