@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "install-client": "cd client && npm install",
-    "develop": "npm run start --prefix client",
-    "start": "npm run start --prefix client"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"node index.js\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
