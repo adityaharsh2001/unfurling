@@ -4,11 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"node index.js\" \"npm run build\"",
     "install-client": "cd client && npm install",
-    "server": "nodemon server.js",
-    "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\"",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\""
+    "develop": "npm run start --prefix client",
+    "start": "npm run start --prefix client"
   },
   "keywords": [],
   "author": "",
