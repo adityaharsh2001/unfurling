@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import VideoContext from "../../context/VideoContext";
 import "./Video.css";
-import { Card, Modal, Button, Input, notification, Avatar } from "antd";
+import { Card, Modal, Input, notification, Avatar } from "antd";
 import Man from "../../assests/man.svg";
 import VideoIcon from "../../assests/video.svg";
 import { io } from "socket.io-client";
@@ -23,12 +23,12 @@ const Video = ({filter}) => {
     userVideo,
     stream,
     name,
-    setName,
+    // setName,
     callEnded,
-    me,
-    callUser,
-    leaveCall,
-    answerCall,
+    // me,
+    // callUser,
+    // leaveCall,
+    // answerCall,
     sendMsg: sendMsgFunc,
     msgRcv,
     chat,
@@ -244,5 +244,4 @@ const Video = ({filter}) => {
     </div>
   );
 };
-
 export default Video;

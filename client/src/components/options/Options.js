@@ -71,14 +71,16 @@ const Options = ({ themeValue }) => {
       {callAccepted ? (
         <div className={classes.hungupbutton} onClick={leaveCall}>
           <Button
-                variant="contained"
-                onClick={leaveCall}
-                className={classes.hang}
-              >
-                <img src={Hang} alt="hang up" style={{ height: "15px" }} />
-                &nbsp; Hang up
-              </Button>
+            variant="contained"
+            onClick={leaveCall}
+            className={classes.hang}
+          >
+            <img src={Hang} alt="hang up" style={{ height: "15px" }} />
+            &nbsp; Hang up
+          </Button>
         </div>
+
+        
       ) : (
         <div
           className={`${classes.options} ${
@@ -116,7 +118,7 @@ const Options = ({ themeValue }) => {
 
               <div className={classes.share_social}>
                 <WhatsappShareButton
-                  url={`https://video-chatter.netlify.com/`}
+                  url={`https://viochat.tech/`}
                   title={`Join this meeting with the given code ${me}\n`}
                   separator="Link: "
                   className={classes.share_icon}
@@ -124,7 +126,7 @@ const Options = ({ themeValue }) => {
                   <WhatsappIcon size={26} round />
                 </WhatsappShareButton>
                 <TelegramShareButton
-                  url={`https://video-chatter.netlify.com/`}
+                  url={`https://viochat.tech/`}
                   title={`Join this meeting with the given code ${me}\n`}
                   separator="Link: "
                   className={classes.share_icon}
@@ -160,32 +162,20 @@ const Options = ({ themeValue }) => {
               }
             />
 
-            {callAccepted && !callEnded ? (
+            <div className={classes.btnParent}>
               <Button
-                variant="contained"
-                onClick={leaveCall}
-                className={classes.hang}
+                type="primary"
+                icon={<PhoneOutlined />}
+                onClick={() => {
+                  if (name.length) callUser(idToCall);
+                  else message.error("Please enter your name to call!");
+                }}
+                className={classes.btn}
                 tabIndex="0"
               >
-                <img src={Hang} alt="hang up" style={{ height: "15px" }} />
-                &nbsp; Hang up
+                Join
               </Button>
-            ) : (
-              <div className={classes.btnParent}>
-                <Button
-                  type="primary"
-                  icon={<PhoneOutlined />}
-                  onClick={() => {
-                    if (name.length) callUser(idToCall);
-                    else message.error("Please enter your name to call!");
-                  }}
-                  className={classes.btn}
-                  tabIndex="0"
-                >
-                  Join
-                </Button>
-              </div>
-            )}
+            </div>
           </div>
 
           {call.isReceivingCall && !callAccepted && (

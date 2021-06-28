@@ -29,6 +29,17 @@ const AppHeader = ({ themeValue, themeHandler, filterHandler }) => {
       </Menu.Item>
     </Menu>
   );
+  window.addEventListener("load", () => {
+
+    let clock = document.getElementById("clock")
+      setInterval( () => {
+        let date = new Date ();
+        clock.innerHTML = date.toLocaleTimeString();
+        
+      })
+
+  })
+  
   const onToggle = (checked) => {
     themeHandler(checked);
   };
@@ -49,6 +60,7 @@ const AppHeader = ({ themeValue, themeHandler, filterHandler }) => {
           Filter <DownOutlined />
         </span>
       </Dropdown>
+      <div id="clock">00:00:00</div>
       <Switch
         defaultunChecked
         onChange={onToggle}
