@@ -46,6 +46,7 @@ const Options = ({ themeValue }) => {
     setOtherUser,
     leaveCall1,
     Record,
+    isPresenting,
   } = useContext(VideoContext);
 
   useEffect(() => {
@@ -82,15 +83,24 @@ const Options = ({ themeValue }) => {
             <img src={Hang} alt="hang up" style={{ height: "15px" }} />
             &nbsp; Hang up
           </Button>
-
-          <Button
+          {isPresenting? (<Button
             variant="contained"
-            onClick={Record}
+            // onClick={Record}
             className={classes.record}
             id="record"
           >
-            Record
-          </Button>
+            Stop Record
+          </Button>) : 
+           <Button
+           variant="contained"
+           onClick={Record}
+           className={classes.record}
+          //  id="record"
+         >
+           Record
+         </Button>
+         }
+         
 
           {/* <Button
             variant="contained"

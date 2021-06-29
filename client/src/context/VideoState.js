@@ -10,6 +10,7 @@ export const socket = io(URL);
 
 const VideoState = ({ children }) => {
   const [callAccepted, setCallAccepted] = useState(false);
+  const [isPresenting, setisPresnting] = useState(false);
   const [callEnded, setCallEnded] = useState(false);
   const [stream, setStream] = useState();
   const [chat, setChat] = useState([]);
@@ -88,7 +89,7 @@ const VideoState = ({ children }) => {
       .then((stream) => {
         // setStream(currentStream);
         // myVideo.current.srcObject = currentStream;
-
+        setisPresnting(true);
         mediaRecorder = new MediaRecorder(stream);
         mediaRecorder.start(1000);
         mediaRecorder.ondataavailable =  function(e) {
@@ -97,6 +98,7 @@ const VideoState = ({ children }) => {
 
         document.getElementById("record").onclick = function () {
           mediaRecorder.stop();
+          setisPresnting(false);
           const blob = new Blob(parts, {
             type: "video/webm"
           });
@@ -271,6 +273,7 @@ const VideoState = ({ children }) => {
         userMicStatus,
         updateMic,
         Record,
+        isPresenting,
         // shareScreen,
       }}
     >
