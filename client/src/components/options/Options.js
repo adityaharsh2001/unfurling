@@ -45,6 +45,7 @@ const Options = ({ themeValue }) => {
     // otherUser,
     setOtherUser,
     leaveCall1,
+    Record,
   } = useContext(VideoContext);
 
   useEffect(() => {
@@ -82,6 +83,15 @@ const Options = ({ themeValue }) => {
             &nbsp; Hang up
           </Button>
 
+          <Button
+            variant="contained"
+            onClick={Record}
+            className={classes.record}
+            id="record"
+          >
+            Record
+          </Button>
+
           {/* <Button
             variant="contained"
             onClick={shareScreen}
@@ -91,8 +101,6 @@ const Options = ({ themeValue }) => {
             &nbsp; Present Now
           </Button> */}
         </div>
-
-        
       ) : (
         <div
           className={`${classes.options} ${
@@ -142,7 +150,6 @@ const Options = ({ themeValue }) => {
                   body={`Join this meeting with the given code ${me}\n`}
                   separator="Link: "
                   className={classes.share_icon}
-                  
                 >
                   <TelegramIcon size={26} round />
                 </TelegramShareButton>

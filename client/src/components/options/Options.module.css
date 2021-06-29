@@ -17,9 +17,8 @@
 } */
 .hungupbutton
 {
-  cursor: pointer;
   margin-top: 20px;
-  color:red;
+  color:white;
   background-color: transparent;
   margin-left: auto;
   margin-right: auto;
@@ -98,6 +97,8 @@
   color: #8c0000 !important;
   font-weight: bold;
   margin-top: 0.5rem;
+  margin: 0px 20px 0px 20px;
+  width: 150px;
 }
 
 .share_options {

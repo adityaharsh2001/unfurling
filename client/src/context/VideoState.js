@@ -28,6 +28,8 @@ const VideoState = ({ children }) => {
   const userVideo = useRef();
   const connectionRef = useRef();
 
+  // var mediaRecorder;
+
   useEffect(() => {
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
@@ -72,9 +74,49 @@ const VideoState = ({ children }) => {
     });
   }, []);
 
+  const Record = () => {
+    // global.URL.createObjectURL = jest.fn();
+    const parts = [];
+    let mediaRecorder;
+    navigator.mediaDevices
+      .getDisplayMedia({
+        cursor: true,
+        video: {
+          mediaSource: "screen",
+        },
+      })
+      .then((stream) => {
+        // setStream(currentStream);
+        // myVideo.current.srcObject = currentStream;
+
+        mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.start(1000);
+        mediaRecorder.ondataavailable =  function(e) {
+        parts.push(e.data);
+        }
+
+        document.getElementById("record").onclick = function () {
+          mediaRecorder.stop();
+          const blob = new Blob(parts, {
+            type: "video/webm"
+          });
+          const url= global.URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.style = "display: none";
+          a.href = url;
+          a.download = "meetrecording.webm";
+          a.click();
+        }
+      });
+
+      
+
+    // callUser();
+  };
+
   // const shareScreen = () => {
   //   navigator.mediaDevices
-  //     .getDisplayMedia({ 
+  //     .getDisplayMedia({
   //       cursor: true,
   //       video : {
   //         MediaSource: "screen",
@@ -228,6 +270,7 @@ const VideoState = ({ children }) => {
         myMicStatus,
         userMicStatus,
         updateMic,
+        Record,
         // shareScreen,
       }}
     >
