@@ -8,9 +8,11 @@ import VideoContext from "../../context/VideoContext";
 import Hang from "../../assests/hang.svg";
 import {
   TelegramShareButton,
-  LinkedinShareButton,
+  // LinkedinShareButton,
+  EmailShareButton,
   TelegramIcon,
-  LinkedinIcon,
+  EmailIcon,
+  // LinkedinIcon,
   WhatsappShareButton,
   WhatsappIcon,
 } from "react-share";
@@ -34,8 +36,8 @@ const Options = ({ themeValue }) => {
     // stream,
     name,
     setName,
-    shareScreen,
-    callEnded,
+    // shareScreen,
+    // callEnded,
     me,
     callUser,
     leaveCall,
@@ -80,14 +82,14 @@ const Options = ({ themeValue }) => {
             &nbsp; Hang up
           </Button>
 
-          <Button
+          {/* <Button
             variant="contained"
             onClick={shareScreen}
             className={classes.hang}
           >
             <img src={Hang} alt="hang up" style={{ height: "15px" }} />
             &nbsp; Present Now
-          </Button>
+          </Button> */}
         </div>
 
         
@@ -137,20 +139,21 @@ const Options = ({ themeValue }) => {
                 </WhatsappShareButton>
                 <TelegramShareButton
                   url={`https://viochat.tech/`}
-                  title={`Join this meeting with the given code ${me}\n`}
+                  body={`Join this meeting with the given code ${me}\n`}
                   separator="Link: "
                   className={classes.share_icon}
+                  
                 >
                   <TelegramIcon size={26} round />
                 </TelegramShareButton>
 
-                <LinkedinShareButton
-                  url={`https://video-chatter.netlify.com/`}
+                <EmailShareButton
+                  url={`https://viochat.tech/`}
                   title={`Join this meeting with the given code ${me}\n`}
                   className={classes.share_icon}
                 >
-                  <LinkedinIcon size={26} round />
-                </LinkedinShareButton>
+                  <EmailIcon size={26} round />
+                </EmailShareButton>
               </div>
             </div>
           </div>

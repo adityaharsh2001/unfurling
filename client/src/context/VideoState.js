@@ -72,31 +72,31 @@ const VideoState = ({ children }) => {
     });
   }, []);
 
-  function shareScreen () {
-    navigator.mediaDevices
-      .getDisplayMedia({ 
-        cursor: true,
-        video : {
-          MediaSource: "screen",
-        }})
-      .then((currentStream) => {
-        // setStream(currentStream);
-        myVideo.current.srcObject = currentStream;
-      });
+  // const shareScreen = () => {
+  //   navigator.mediaDevices
+  //     .getDisplayMedia({ 
+  //       cursor: true,
+  //       video : {
+  //         MediaSource: "screen",
+  //       }})
+  //     .then((currentStream) => {
+  //       // setStream(currentStream);
+  //       myVideo.current.srcObject = currentStream;
+  //     });
 
-    socket.on("callUser", ({ from, name: callerName, signal }) => {
-      setCall({ isReceivingCall: true, from, name: callerName, signal });
-    });
+  //   socket.on("callUser", ({ from, name: callerName, signal }) => {
+  //     setCall({ isReceivingCall: true, from, name: callerName, signal });
+  //   });
 
-    socket.on("msgRcv", ({ name, msg: value, sender }) => {
-      setMsgRcv({ value, sender });
-      setTimeout(() => {
-        setMsgRcv({});
-      }, 2000);
-    });
+  //   socket.on("msgRcv", ({ name, msg: value, sender }) => {
+  //     setMsgRcv({ value, sender });
+  //     setTimeout(() => {
+  //       setMsgRcv({});
+  //     }, 1000);
+  //   });
 
-    // callUser();
-  };
+  //   // callUser();
+  // };
 
   // useEffect(() => {
   //   console.log(chat);
@@ -228,7 +228,7 @@ const VideoState = ({ children }) => {
         myMicStatus,
         userMicStatus,
         updateMic,
-        shareScreen,
+        // shareScreen,
       }}
     >
       {children}

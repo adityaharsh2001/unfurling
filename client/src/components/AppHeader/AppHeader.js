@@ -34,7 +34,7 @@ const AppHeader = ({ themeValue, themeHandler, filterHandler }) => {
     let clock = document.getElementById("clock");
     setInterval(() => {
       let date = new Date();
-      clock.innerHTML = date.toLocaleTimeString();
+      clock.innerHTML = "Time : " + date.toLocaleTimeString();
     });
   });
 
@@ -43,12 +43,13 @@ const AppHeader = ({ themeValue, themeHandler, filterHandler }) => {
   let minutes = 0;
 
   if (callAccepted) {
-    window.setInterval(callduration, 1000);
     let clock = document.getElementById("clock");
     setInterval(() => {
       let date = new Date();
-      clock.innerHTML = date.toLocaleTimeString();
+      clock.innerHTML = "Time : " +  date.toLocaleTimeString();
     });
+    
+    window.setInterval(callduration, 1000);
   }
 
   function callduration() {
@@ -62,7 +63,7 @@ const AppHeader = ({ themeValue, themeHandler, filterHandler }) => {
       }
     }
     document.getElementById("calltime").innerHTML =
-      hours + ":" + minutes + ":" + seconds;
+      "Call Duration : " + hours + ":" + minutes + ":" + seconds;
   }
 
   const onToggle = (checked) => {
@@ -87,11 +88,11 @@ const AppHeader = ({ themeValue, themeHandler, filterHandler }) => {
       </Dropdown>
       {callAccepted ? (
         <>
-          <div id="clock"></div>
+          <div id="clock">Time : </div>
           <div id="calltime"></div>
         </>
       ) : (
-        <div id="clock">00:00:00</div>
+        <div id="clock">Meet Duration : </div>
       )}
       {/* <div id="clock">00:00:00</div>
       <div id="calltime"></div> */}
