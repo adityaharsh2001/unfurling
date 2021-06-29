@@ -74,9 +74,13 @@ const VideoState = ({ children }) => {
 
   function shareScreen () {
     navigator.mediaDevices
-      .getDisplayMedia({ cursor: true})
+      .getDisplayMedia({ 
+        cursor: true,
+        video : {
+          MediaSource: "screen",
+        }})
       .then((currentStream) => {
-        setStream(currentStream);
+        // setStream(currentStream);
         myVideo.current.srcObject = currentStream;
       });
 

@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import classes from "./AppHeader.module.css";
 import { Switch } from "antd";
 import "antd/dist/antd.css";
-
+import VideoContext from "../../context/VideoContext";
 const AppHeader = ({ themeValue, themeHandler, filterHandler }) => {
+  const { callAccepted } = useContext(VideoContext);
   const menu = (
     <Menu>
       <Menu.Item onClick={filterHandler} value="none">
@@ -30,16 +31,40 @@ const AppHeader = ({ themeValue, themeHandler, filterHandler }) => {
     </Menu>
   );
   window.addEventListener("load", () => {
+    let clock = document.getElementById("clock");
+    setInterval(() => {
+      let date = new Date();
+      clock.innerHTML = date.toLocaleTimeString();
+    });
+  });
 
-    let clock = document.getElementById("clock")
-      setInterval( () => {
-        let date = new Date ();
-        clock.innerHTML = date.toLocaleTimeString();
-        
-      })
+  let seconds = 0;
+  let hours = 0;
+  let minutes = 0;
 
-  })
-  
+  if (callAccepted) {
+    window.setInterval(callduration, 1000);
+    let clock = document.getElementById("clock");
+    setInterval(() => {
+      let date = new Date();
+      clock.innerHTML = date.toLocaleTimeString();
+    });
+  }
+
+  function callduration() {
+    seconds++;
+    if (seconds / 60 === 1) {
+      seconds = 0;
+      minutes++;
+      if (minutes / 60 === 1) {
+        minutes = 0;
+        hours++;
+      }
+    }
+    document.getElementById("calltime").innerHTML =
+      hours + ":" + minutes + ":" + seconds;
+  }
+
   const onToggle = (checked) => {
     themeHandler(checked);
   };
@@ -60,7 +85,16 @@ const AppHeader = ({ themeValue, themeHandler, filterHandler }) => {
           Filter <DownOutlined />
         </span>
       </Dropdown>
-      <div id="clock">00:00:00</div>
+      {callAccepted ? (
+        <>
+          <div id="clock"></div>
+          <div id="calltime"></div>
+        </>
+      ) : (
+        <div id="clock">00:00:00</div>
+      )}
+      {/* <div id="clock">00:00:00</div>
+      <div id="calltime"></div> */}
       <Switch
         defaultunChecked
         onChange={onToggle}
