@@ -34,6 +34,7 @@ const Options = ({ themeValue }) => {
     // stream,
     name,
     setName,
+    shareScreen,
     callEnded,
     me,
     callUser,
@@ -69,7 +70,7 @@ const Options = ({ themeValue }) => {
   return (
     <div>
       {callAccepted ? (
-        <div className={classes.hungupbutton} onClick={leaveCall}>
+        <div className={classes.hungupbutton}>
           <Button
             variant="contained"
             onClick={leaveCall}
@@ -77,6 +78,15 @@ const Options = ({ themeValue }) => {
           >
             <img src={Hang} alt="hang up" style={{ height: "15px" }} />
             &nbsp; Hang up
+          </Button>
+
+          <Button
+            variant="contained"
+            onClick={shareScreen}
+            className={classes.hang}
+          >
+            <img src={Hang} alt="hang up" style={{ height: "15px" }} />
+            &nbsp; Present Now
           </Button>
         </div>
 
