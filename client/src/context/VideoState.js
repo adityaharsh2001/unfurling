@@ -96,7 +96,7 @@ const VideoState = ({ children }) => {
         parts.push(e.data);
         }
 
-        document.getElementById("record").onclick = function () {
+        document.getElementById("stoprecord").onclick = function () {
           mediaRecorder.stop();
           setisPresnting(false);
           const blob = new Blob(parts, {

@@ -85,9 +85,8 @@ const Options = ({ themeValue }) => {
           </Button>
           {isPresenting? (<Button
             variant="contained"
-            // onClick={Record}
             className={classes.record}
-            id="record"
+            id="stoprecord"
           >
             Stop Record
           </Button>) : 
